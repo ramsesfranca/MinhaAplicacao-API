@@ -1,8 +1,7 @@
-﻿using MinhaAplicacao.Dominio.Enums;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MinhaAplicacao_API.Models
+namespace MinhaAplicacao_Cliente.Models
 {
     public class PessoaModel
     {
@@ -13,7 +12,7 @@ namespace MinhaAplicacao_API.Models
         [StringLength(80, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
         public string Nome { get; set; }
 
-        public Sexo Sexo { get; set; }
+        //public Sexo Sexo { get; set; }
 
         public string Email { get; set; }
 

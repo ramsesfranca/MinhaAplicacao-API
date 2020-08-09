@@ -22,16 +22,14 @@ namespace MinhaAplicacao_API.Controllers
             this._mapper = mapper;
         }
 
-        // GET: api/Pessoas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PessoaModel>>> GetPessoas()
+        public async Task<ActionResult<IEnumerable<PessoaModel>>> ObterTodos()
         {
             return this.Ok(this._mapper.Map<List<PessoaModel>>(await this._pessoaServico.SelecionarTodos()));
         }
 
-        // GET: api/Pessoas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pessoa>> GetPessoa(int id)
+        public async Task<ActionResult<Pessoa>> ObterPorId(int id)
         {
             var pessoa = await this._pessoaServico.SelecionarPorId(id);
 
@@ -44,19 +42,28 @@ namespace MinhaAplicacao_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Pessoa>> PostPessoa(PessoaModel modelo)
+        public async Task<ActionResult<Pessoa>> Adicionar(PessoaModel modelo)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             await this._pessoaServico.Inserir(this._mapper.Map<Pessoa>(modelo));
 
-            return CreatedAtAction("GetPessoa", new { id = modelo.Id }, modelo);
+            return CreatedAtAction("ObterPorId", new { id = modelo.Id }, modelo);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPessoa(int id, PessoaModel modelo)
+        public async Task<IActionResult> Atualizar(int id, PessoaModel modelo)
         {
             if (id != modelo.Id)
             {
                 return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
             }
 
             try
@@ -78,9 +85,8 @@ namespace MinhaAplicacao_API.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Pessoas/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Pessoa>> DeletePessoa(int id)
+        public async Task<ActionResult<Pessoa>> Excluir(int id)
         {
             var pessoa = await this._pessoaServico.SelecionarPorId(id);
 
