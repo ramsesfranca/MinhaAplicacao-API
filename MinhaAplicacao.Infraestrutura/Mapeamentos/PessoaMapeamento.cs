@@ -12,7 +12,7 @@ namespace MinhaAplicacao.Infraestrutura.Mapeamentos
 
             builder.Property(p => p.Nome).IsRequired().HasColumnType("varchar(80)");
             builder.Property(p => p.Sexo);
-            builder.Property(p => p.Email);
+            builder.Property(p => p.Email).HasColumnType("varchar(80)");
             builder.Property(p => p.DataNascimento).IsRequired().HasColumnType("datetime");
             builder.Property(p => p.Nacionalidade).HasColumnType("varchar(80)");
             builder.Property(p => p.Naturalidade).HasColumnType("varchar(80)");

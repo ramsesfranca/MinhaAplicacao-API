@@ -51,7 +51,7 @@ namespace MinhaAplicacao_API.Controllers
 
             await this._pessoaServico.Inserir(this._mapper.Map<Pessoa>(modelo));
 
-            return CreatedAtAction("ObterPorId", new { id = modelo.Id }, modelo);
+            return Ok(modelo);
         }
 
         [HttpPut("{id}")]
@@ -82,7 +82,7 @@ namespace MinhaAplicacao_API.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(modelo);
         }
 
         [HttpDelete("{id}")]

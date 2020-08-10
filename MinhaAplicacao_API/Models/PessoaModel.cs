@@ -18,6 +18,8 @@ namespace MinhaAplicacao_API.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
         public string Naturalidade { get; set; }

@@ -10,7 +10,7 @@ using MinhaAplicacao.Infraestrutura;
 namespace MinhaAplicacao.Infraestrutura.Migrations
 {
     [DbContext(typeof(MinhaAplicacaoDbContext))]
-    [Migration("20200809182244_Criar_Tabela_Pessoa")]
+    [Migration("20200809235707_Criar_Tabela_Pessoa")]
     partial class Criar_Tabela_Pessoa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace MinhaAplicacao.Infraestrutura.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(80)");
 
                     b.Property<string>("Nacionalidade")
                         .HasColumnType("varchar(80)");
@@ -54,7 +54,7 @@ namespace MinhaAplicacao.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(80)");
 
-                    b.Property<int>("Sexo")
+                    b.Property<int?>("Sexo")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

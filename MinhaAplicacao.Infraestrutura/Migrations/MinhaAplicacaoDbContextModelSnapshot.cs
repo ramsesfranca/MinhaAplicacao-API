@@ -38,7 +38,7 @@ namespace MinhaAplicacao.Infraestrutura.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(80)");
 
                     b.Property<string>("Nacionalidade")
                         .HasColumnType("varchar(80)");
@@ -50,7 +50,7 @@ namespace MinhaAplicacao.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(80)");
 
-                    b.Property<int>("Sexo")
+                    b.Property<int?>("Sexo")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

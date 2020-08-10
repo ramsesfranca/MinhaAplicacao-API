@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<MinhaAplicacao_Cliente.Models.PessoaModel>
 
-<h1>Pessoas</h1>
+<h4>Pessoas</h4>
 
 <p>
-    @*<a asp-action="Create">Create New</a>*@
+    <a asp-action="Adicionar">Novo</a>
 </p>
 <table class="table">
     <thead>
@@ -22,12 +22,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataNascimento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Naturalidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nacionalidade)
             </th>
             <th></th>
         </tr>
@@ -52,15 +46,8 @@
                     @Html.DisplayFor(modelItem => item.DataNascimento)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Naturalidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nacionalidade)
-                </td>
-                <td>
-                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                    <a asp-action="Atualizar" asp-route-id="@item.Id">Atualizar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
