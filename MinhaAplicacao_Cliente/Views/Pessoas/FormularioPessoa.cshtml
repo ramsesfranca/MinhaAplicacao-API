@@ -8,19 +8,24 @@
     <span asp-validation-for="Nome" class="text-danger"></span>
 </div>
 <div class="form-group">
+    <label asp-for="CPF" class="control-label"></label>
+    <input asp-for="CPF" class="form-control" />
+    <span asp-validation-for="CPF" class="text-danger"></span>
+</div>
+<div class="form-group">
     <label asp-for="Sexo" class="control-label"></label>
     <select asp-for="Sexo" asp-items="Html.GetEnumSelectList<Sexo>()" class="form-control"></select>
     <span asp-validation-for="Sexo" class="text-danger"></span>
 </div>
 <div class="form-group">
-    <label asp-for="Email" class="control-label"></label>
-    <input asp-for="Email" class="form-control" />
-    <span asp-validation-for="Email" class="text-danger"></span>
-</div>
-<div class="form-group">
     <label asp-for="DataNascimento" class="control-label"></label>
     <input asp-for="DataNascimento" class="form-control" type="text" />
     <span asp-validation-for="DataNascimento" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Email" class="control-label"></label>
+    <input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
 </div>
 <div class="form-group">
     <label asp-for="Naturalidade" class="control-label"></label>
@@ -31,11 +36,6 @@
     <label asp-for="Nacionalidade" class="control-label"></label>
     <input asp-for="Nacionalidade" class="form-control" />
     <span asp-validation-for="Nacionalidade" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="CPF" class="control-label"></label>
-    <input asp-for="CPF" class="form-control" />
-    <span asp-validation-for="CPF" class="text-danger"></span>
 </div>
 <div class="form-group">
     <input type="submit" value="Salvar" class="btn btn-primary" />

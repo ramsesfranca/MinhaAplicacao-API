@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MinhaAplicacao_Cliente.Common.Configurations;
 
 namespace MinhaAplicacao_Cliente
 {
@@ -17,7 +18,7 @@ namespace MinhaAplicacao_Cliente
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddMvcConfiguration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,6 +37,7 @@ namespace MinhaAplicacao_Cliente
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
+            app.UsarGlobalizacaoConfig();
 
             app.UseEndpoints(endpoints =>
             {
