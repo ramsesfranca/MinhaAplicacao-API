@@ -32,6 +32,8 @@ https://stackoverflow.com/questions/3850019/running-two-projects-at-once-in-visu
 
 # Documentação da API
 
+Toda a documentação encontra-se na URL:
+
 https://localhost:44398/swagger/index.html
 
 # Pontos de melhoria
