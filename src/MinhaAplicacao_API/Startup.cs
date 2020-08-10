@@ -26,7 +26,7 @@ namespace MinhaAplicacao_API
 
             services.AddControllers();
             services.AddApiConfig();
-            //services.AddSwaggerConfig();
+            services.AddSwaggerConfig();
             services.CarrearConnection(this.Configuration);
             services.CarregarDependencias();
             services.CarregarAutoMapper();
@@ -46,6 +46,8 @@ namespace MinhaAplicacao_API
             {
                 endpoints.MapControllers();
             });
+            app.UseSwagger();
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "V1"));
         }
     }
 }
