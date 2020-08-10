@@ -10,6 +10,7 @@ Dentre as biliotecas utilizadas estão:
 
 - AutoMapper
 - FluentValidation
+- Swagger
 
 # Projeto MinhaAplicacao_Cliente (Cliente/front-end)
 Foi desenvolvida utilizando ASP.NET MVC Core 3.1
@@ -30,3 +31,17 @@ https://stackoverflow.com/questions/3850019/running-two-projects-at-once-in-visu
 
 
 # Documentação da API
+
+https://localhost:44398/swagger/index.html
+
+# Pontos de melhoria
+
+Pretendia-se abordar ainda alguns pontos na implementação, mas por questões de tempo optei por focar no funcionamento principal da solução.
+Seguem alguns itens de melhoria:
+
+- O acesso à aplicação só poderá ser realizado por um usuário pré-existente via autenticação **basic**.
+- Exibir notificações das validações tanto de tela (DataAnnotations) como as de negócio. 
+- Implementar teste de integração da API em .NET e garantir pelo menos 80% de cobertura de código.
+- Fornecer projeto no SOAPUI ou no Postman com exemplos de request para cada endpoint implementado.
+- Implementar utilizando MongoDB ou outro banco de dados NoSQL.
+- A aplicação rodando em algum ambiente em nuvem
