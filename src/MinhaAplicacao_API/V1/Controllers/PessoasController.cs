@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MinhaAplicacao.Dominio.Entidades;
 using MinhaAplicacao.Dominio.Interfaces.Services;
-using MinhaAplicacao_API.Models;
+using MinhaAplicacao_API.Controllers;
+using MinhaAplicacao_API.V1.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MinhaAplicacao_API.Controllers
+namespace MinhaAplicacao_API.V1.Controllers
 {
-    //[Route("api/pessoas")]
-    [Route("[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/pessoas")]
     public class PessoasController : MinhaAplicacaoController
     {
         private readonly IPessoaServico _pessoaServico;

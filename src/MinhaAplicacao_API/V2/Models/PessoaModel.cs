@@ -3,7 +3,7 @@ using MinhaAplicacao_API.Common.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MinhaAplicacao_API.Models
+namespace MinhaAplicacao_API.V2.Models
 {
     public class PessoaModel
     {
@@ -31,5 +31,9 @@ namespace MinhaAplicacao_API.Models
         [StringLength(14, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 14)]
         [ValidacaoCPF(ErrorMessage = "Por favor entre com um documento válido")]
         public string CPF { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [StringLength(80, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
+        public string Endereco { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MinhaAplicacao.Dominio.Entidades;
-using MinhaAplicacao_API.Models;
 
 namespace MinhaAplicacao_API.Common.Mappers.Profiles
 {
@@ -8,7 +7,8 @@ namespace MinhaAplicacao_API.Common.Mappers.Profiles
     {
         public PessoaProfile()
         {
-            this.CreateMap<Pessoa, PessoaModel>().ReverseMap();
+            this.CreateMap<Pessoa, V1.Models.PessoaModel>().ReverseMap();
+            this.CreateMap<Pessoa, V2.Models.PessoaModel>().ReverseMap();
         }
     }
 }

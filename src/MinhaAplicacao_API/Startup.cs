@@ -25,6 +25,8 @@ namespace MinhaAplicacao_API
             });
 
             services.AddControllers();
+            services.AddApiConfig();
+            //services.AddSwaggerConfig();
             services.CarrearConnection(this.Configuration);
             services.CarregarDependencias();
             services.CarregarAutoMapper();
