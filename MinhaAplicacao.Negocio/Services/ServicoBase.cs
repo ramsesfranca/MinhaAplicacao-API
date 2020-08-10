@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using MinhaAplicacao.Dominio.Entidades;
 using MinhaAplicacao.Dominio.Interfaces.Repositories;
 using MinhaAplicacao.Dominio.Interfaces.Services;
@@ -98,6 +99,19 @@ namespace MinhaAplicacao.Negocio.Services
         public virtual async Task<bool> Existe(Expression<Func<TEntidade, bool>> predicado)
         {
             return await this._repositorio.SelecionarPor(predicado).AnyAsync();
+        }
+
+        protected bool ExecutarValidacao<TValidacao>(TValidacao validacao, TEntidade entidade)
+            where TValidacao : AbstractValidator<TEntidade>
+        {
+            var resultado = validacao.Validate(entidade);
+
+            if (!resultado.IsValid)
+            {
+                //this.Notificar(resultado);
+            }
+
+            return resultado.IsValid;
         }
     }
 }
