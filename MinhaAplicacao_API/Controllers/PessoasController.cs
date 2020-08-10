@@ -38,7 +38,7 @@ namespace MinhaAplicacao_API.Controllers
                 return NotFound();
             }
 
-            return pessoa;
+            return Ok(this._mapper.Map<PessoaModel>(pessoa));
         }
 
         [HttpPost]
@@ -97,7 +97,7 @@ namespace MinhaAplicacao_API.Controllers
 
             await this._pessoaServico.Deletar(pessoa);
 
-            return pessoa;
+            return Ok();
         }
     }
 }

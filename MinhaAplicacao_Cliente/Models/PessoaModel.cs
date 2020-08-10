@@ -16,17 +16,22 @@ namespace MinhaAplicacao_Cliente.Models
         [Display(Name = "Sexo")]
         public Sexo Sexo { get; set; }
 
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
 
+        [Display(Name = "Data Nascimento")]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
+        [Display(Name = "Naturalidade")]
         public string Naturalidade { get; set; }
 
+        [Display(Name = "Nacionalidade")]
         public string Nacionalidade { get; set; }
 
+        [Display(Name = "CPF")]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [StringLength(14, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 14)]
         public string CPF { get; set; }

@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Pessoas\Delete.cshtml" />
     <Content Remove="Views\Pessoas\Details.cshtml" />
   </ItemGroup>
 

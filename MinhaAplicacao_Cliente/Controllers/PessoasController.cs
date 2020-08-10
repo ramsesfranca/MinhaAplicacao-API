@@ -62,6 +62,30 @@ namespace MinhaAplicacao_Cliente.Controllers
             return View(mdeolo);
         }
 
+        public async Task<IActionResult> Excluir(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            PessoaModel mdeolo;
+
+            using (var httpClient = new HttpClient())
+            {
+                using var response = await httpClient.GetAsync($"{this._apiBaseUrl}/{id}");
+
+                mdeolo = JsonConvert.DeserializeObject<PessoaModel>(await response.Content.ReadAsStringAsync());
+
+                if (mdeolo == null)
+                {
+                    return NotFound();
+                }
+            }
+
+            return View(mdeolo);
+        }
+
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Adicionar(PessoaModel modelo)
         {
@@ -85,8 +109,7 @@ namespace MinhaAplicacao_Cliente.Controllers
             return View(modelo);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Atualizar(int id, PessoaModel modelo)
         {
             if (id != modelo.Id)
@@ -114,53 +137,13 @@ namespace MinhaAplicacao_Cliente.Controllers
             return View(modelo);
         }
 
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost, ActionName("Excluir"), ValidateAntiForgeryToken]
+        public async Task<IActionResult> ExcluirCorminar(int id)
+        {
+            using var cliente = new HttpClient();
+            using var resposta = await cliente.DeleteAsync($"{this._apiBaseUrl}/{id}");
 
-        //    var pessoa = await _context.Pessoas
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (pessoa == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(pessoa);
-        //}
-
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var pessoa = await _context.Pessoas
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (pessoa == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(pessoa);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var pessoa = await _context.Pessoas.FindAsync(id);
-        //    _context.Pessoas.Remove(pessoa);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool PessoaExists(int id)
-        //{
-        //    return _context.Pessoas.Any(e => e.Id == id);
-        //}
+            return resposta.StatusCode == HttpStatusCode.OK ? RedirectToAction(nameof(Index)) : RedirectToAction(nameof(Excluir), id);
+        }
     }
 }
