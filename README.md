@@ -22,4 +22,11 @@ Foi criando um script para criação do banco (MinhaAplicacao-API\sql\Script_Cri
 
 Como foi utilizado Code-first com Migrations, para geração da base de dados basta executar o comando Update-Database na CLI do Visual Studio, apontando para o projeto que contém o MinhaAplicacaoDbContext (MinhaAplicacao.Infraestrutura). O programa se encarregará de ler as Migrations e criar as tabelas na base de dados. A connection string aponta para a base MinhaAplicacao numa instância local do SQL Server.
 
+Para rodar os projetos (MinhaAplicacao_API e MinhaAplicacao_Cliente) fiz a seguinte configuração (Iniciando vários projetos de uma vez no Visual Studio), que pode ser visto nesse tutória: 
+
+https://docs.microsoft.com/pt-br/visualstudio/ide/how-to-set-multiple-startup-projects?view=vs-2019
+https://improveandrepeat.com/2019/01/starting-multiple-projects-at-once-in-visual-studio/
+https://stackoverflow.com/questions/3850019/running-two-projects-at-once-in-visual-studio
+
+
 # Documentação da API
