@@ -15,3 +15,14 @@
     <a asp-action="Index">Voltar</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/jquery.maskedinput/jquery.maskedinput.js"></script>
+
+    <script>
+        $(function () {
+            $("#CPF").mask("999.999.999-99");
+        })
+    </script>
+}
