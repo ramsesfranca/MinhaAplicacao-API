@@ -2,7 +2,7 @@
 
 namespace MinhaAplicacao_API.Controllers
 {
-    [ApiController]
+    [ApiController, Route("api/v{version:apiVersion}/[controller]")]
     public abstract class MinhaAplicacaoController : ControllerBase
     {
     }

@@ -15,6 +15,15 @@ namespace MinhaAplicacao_API.Common.Configurations
                     Version = "v1",
                     Description = "Projeto de estudo API",
                 });
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Por favor insira um JWT com \"Bearer\" nesse campo",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                //options.OperationFilter<AuthOperationFilter>();
+                //options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
             });
 
             return services;

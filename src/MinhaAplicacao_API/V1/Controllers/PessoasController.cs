@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace MinhaAplicacao_API.V1.Controllers
 {
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/pessoas")]
     public class PessoasController : MinhaAplicacaoController
     {
         private readonly IPessoaServico _pessoaServico;
