@@ -21,6 +21,7 @@ namespace MinhaAplicacao.Infraestrutura
             #region Configurações Entidades
 
             modelBuilder.ApplyConfiguration(new PessoaMapeamento());
+            modelBuilder.ApplyConfiguration(new CardapioMapeamento());
 
             #endregion
         }

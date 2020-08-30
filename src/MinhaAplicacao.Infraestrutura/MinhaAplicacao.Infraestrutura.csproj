@@ -22,4 +22,8 @@
     <ProjectReference Include="..\MinhaAplicacao.Dominio\MinhaAplicacao.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

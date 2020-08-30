@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 
 namespace MinhaAplicacao_Cliente.Controllers
 {
-    public class PessoasController : BaseController
+    public class CardapiosController : BaseController
     {
-        public PessoasController(IConfiguration configuration)
+        public CardapiosController(IConfiguration configuration)
             : base(configuration)
         {
-            this._apiBaseUrl += "Pessoas";
+            this._apiBaseUrl += "Cardapios";
         }
 
         public async Task<IActionResult> Index()
         {
-            List<PessoaModel> mdeolo;
+            List<CardapioModel> mdeolo;
 
             using (var httpClient = new HttpClient())
             {
                 using var response = await httpClient.GetAsync(this._apiBaseUrl);
 
-                mdeolo = JsonConvert.DeserializeObject<List<PessoaModel>>(await response.Content.ReadAsStringAsync());
+                mdeolo = JsonConvert.DeserializeObject<List<CardapioModel>>(await response.Content.ReadAsStringAsync());
             }
 
             return View(mdeolo);
@@ -44,13 +44,13 @@ namespace MinhaAplicacao_Cliente.Controllers
                 return NotFound();
             }
 
-            PessoaModel mdeolo;
+            CardapioModel mdeolo;
 
             using (var httpClient = new HttpClient())
             {
                 using var response = await httpClient.GetAsync($"{this._apiBaseUrl}/{id}");
 
-                mdeolo = JsonConvert.DeserializeObject<PessoaModel>(await response.Content.ReadAsStringAsync());
+                mdeolo = JsonConvert.DeserializeObject<CardapioModel>(await response.Content.ReadAsStringAsync());
 
                 if (mdeolo == null)
                 {
@@ -68,13 +68,13 @@ namespace MinhaAplicacao_Cliente.Controllers
                 return NotFound();
             }
 
-            PessoaModel mdeolo;
+            CardapioModel mdeolo;
 
             using (var httpClient = new HttpClient())
             {
                 using var response = await httpClient.GetAsync($"{this._apiBaseUrl}/{id}");
 
-                mdeolo = JsonConvert.DeserializeObject<PessoaModel>(await response.Content.ReadAsStringAsync());
+                mdeolo = JsonConvert.DeserializeObject<CardapioModel>(await response.Content.ReadAsStringAsync());
 
                 if (mdeolo == null)
                 {
@@ -86,13 +86,11 @@ namespace MinhaAplicacao_Cliente.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Adicionar(PessoaModel modelo)
+        public async Task<IActionResult> Adicionar(CardapioModel modelo)
         {
             if (ModelState.IsValid)
             {
-                using var cliente = new HttpClient();
-                var contuúdo = new StringContent(JsonConvert.SerializeObject(modelo), Encoding.UTF8, "application/json");
-                using var resposta = await cliente.PostAsync(this._apiBaseUrl, contuúdo);
+                using var resposta = await new HttpClient().PostAsync(this._apiBaseUrl, new StringContent(JsonConvert.SerializeObject(modelo), Encoding.UTF8, "application/json"));
 
                 if (resposta.StatusCode == HttpStatusCode.OK)
                 {
@@ -109,7 +107,7 @@ namespace MinhaAplicacao_Cliente.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Atualizar(int id, PessoaModel modelo)
+        public async Task<IActionResult> Atualizar(int id, CardapioModel modelo)
         {
             if (id != modelo.Id)
             {
@@ -118,9 +116,7 @@ namespace MinhaAplicacao_Cliente.Controllers
 
             if (ModelState.IsValid)
             {
-                using var cliente = new HttpClient();
-                var contuúdo = new StringContent(JsonConvert.SerializeObject(modelo), Encoding.UTF8, "application/json");
-                using var resposta = await cliente.PutAsync($"{this._apiBaseUrl}/{id}", contuúdo);
+                using var resposta = await new HttpClient().PutAsync($"{this._apiBaseUrl}/{id}", new StringContent(JsonConvert.SerializeObject(modelo), Encoding.UTF8, "application/json"));
 
                 if (resposta.StatusCode == HttpStatusCode.OK)
                 {

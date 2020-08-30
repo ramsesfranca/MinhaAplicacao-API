@@ -10,8 +10,8 @@ using MinhaAplicacao.Infraestrutura;
 namespace MinhaAplicacao.Infraestrutura.Migrations
 {
     [DbContext(typeof(MinhaAplicacaoDbContext))]
-    [Migration("20200809235707_Criar_Tabela_Pessoa")]
-    partial class Criar_Tabela_Pessoa
+    [Migration("20200830202034_Criar_Tabela_Cardapios")]
+    partial class Criar_Tabela_Cardapios
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,31 @@ namespace MinhaAplicacao.Infraestrutura.Migrations
                 .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MinhaAplicacao.Dominio.Entidades.Cardapio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataHoraCadastro")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataHoraModificado")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cardapios");
+                });
 
             modelBuilder.Entity("MinhaAplicacao.Dominio.Entidades.Pessoa", b =>
                 {

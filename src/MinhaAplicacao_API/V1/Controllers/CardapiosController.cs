@@ -11,51 +11,51 @@ using System.Threading.Tasks;
 namespace MinhaAplicacao_API.V1.Controllers
 {
     [ApiVersion("1.0")]
-    public class PessoasController : MinhaAplicacaoController
+    public class CardapiosController : MinhaAplicacaoController
     {
-        private readonly IPessoaServico _pessoaServico;
+        private readonly ICardapioServico _CardapioServico;
         private readonly IMapper _mapper;
 
-        public PessoasController(IPessoaServico pessoaServico, IMapper mapper)
+        public CardapiosController(ICardapioServico CardapioServico, IMapper mapper)
         {
-            this._pessoaServico = pessoaServico;
+            this._CardapioServico = CardapioServico;
             this._mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PessoaModel>>> ObterTodos()
+        public async Task<ActionResult<IEnumerable<CardapioModel>>> ObterTodos()
         {
-            return this.Ok(this._mapper.Map<List<PessoaModel>>(await this._pessoaServico.SelecionarTodos()));
+            return this.Ok(this._mapper.Map<List<CardapioModel>>(await this._CardapioServico.SelecionarTodos()));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pessoa>> ObterPorId(int id)
+        public async Task<ActionResult<Cardapio>> ObterPorId(int id)
         {
-            var pessoa = await this._pessoaServico.SelecionarPorId(id);
+            var Cardapio = await this._CardapioServico.SelecionarPorId(id);
 
-            if (pessoa == null)
+            if (Cardapio == null)
             {
                 return NotFound();
             }
 
-            return Ok(this._mapper.Map<PessoaModel>(pessoa));
+            return Ok(this._mapper.Map<CardapioModel>(Cardapio));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Pessoa>> Adicionar(PessoaModel modelo)
+        public async Task<ActionResult<Cardapio>> Adicionar(CardapioModel modelo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await this._pessoaServico.Inserir(this._mapper.Map<Pessoa>(modelo));
+            await this._CardapioServico.Inserir(this._mapper.Map<Cardapio>(modelo));
 
             return Ok(modelo);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Atualizar(int id, PessoaModel modelo)
+        public async Task<IActionResult> Atualizar(int id, CardapioModel modelo)
         {
             if (id != modelo.Id)
             {
@@ -68,11 +68,11 @@ namespace MinhaAplicacao_API.V1.Controllers
 
             try
             {
-                await this._pessoaServico.Alterar(this._mapper.Map<Pessoa>(modelo));
+                await this._CardapioServico.Alterar(this._mapper.Map<Cardapio>(modelo));
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await this._pessoaServico.Existe(p => p.Id.Equals(id)))
+                if (!await this._CardapioServico.Existe(p => p.Id.Equals(id)))
                 {
                     return NotFound();
                 }
@@ -84,16 +84,16 @@ namespace MinhaAplicacao_API.V1.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Pessoa>> Excluir(int id)
+        public async Task<ActionResult<Cardapio>> Excluir(int id)
         {
-            var pessoa = await this._pessoaServico.SelecionarPorId(id);
+            var Cardapio = await this._CardapioServico.SelecionarPorId(id);
 
-            if (pessoa == null)
+            if (Cardapio == null)
             {
                 return NotFound();
             }
 
-            await this._pessoaServico.Deletar(pessoa);
+            await this._CardapioServico.Deletar(Cardapio);
 
             return Ok();
         }
