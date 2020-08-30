@@ -8,7 +8,6 @@ namespace MinhaAplicacao_API.Common.Mappers.Profiles
         public PessoaProfile()
         {
             this.CreateMap<Pessoa, V1.Models.PessoaModel>().ReverseMap();
-            this.CreateMap<Pessoa, V2.Models.PessoaModel>().ReverseMap();
         }
     }
 }
