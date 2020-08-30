@@ -13,11 +13,13 @@ namespace MinhaAplicacao_API.Common.Configurations
         {
             services.AddScoped<IPessoaServico, PessoaServico>();
             services.AddScoped<ICardapioServico, CardapioServico>();
+            services.AddScoped<IComandaServico, ComandaServico>();
 
             services.AddScoped<MinhaAplicacaoDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPessoaRepositorio, PessoaRepositorio>();
             services.AddScoped<ICardapioRepositorio, CardapioRepositorio>();
+            services.AddScoped<IComandaRepositorio, ComandaRepositorio>();
 
             return services;
         }

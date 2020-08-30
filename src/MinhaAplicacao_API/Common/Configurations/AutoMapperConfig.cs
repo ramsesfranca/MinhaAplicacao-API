@@ -10,7 +10,8 @@ namespace MinhaAplicacao_API.Common.Configurations
         {
             services.AddAutoMapper(
                 typeof(PessoaProfile).Assembly,
-                typeof(CardapioProfile).Assembly);
+                typeof(CardapioProfile).Assembly,
+                typeof(ComandaProfile).Assembly);
 
             return services;
         }
