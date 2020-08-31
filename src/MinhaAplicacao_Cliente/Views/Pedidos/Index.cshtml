@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MinhaAplicacao_Cliente.Models.PedidoModel>
+
+<h4>Pedidos</h4>
+
+<p>
+    <a asp-action="Adicionar">Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Comanda.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataHoraCadastro)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comanda.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataHoraCadastro)
+                </td>
+                <td>
+                    <a asp-action="Atualizar" asp-route-id="@item.Id">Atualizar</a> |
+                    <a asp-action="Excluir" asp-route-id="@item.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

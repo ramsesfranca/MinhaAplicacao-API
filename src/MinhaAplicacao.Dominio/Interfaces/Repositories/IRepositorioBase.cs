@@ -12,8 +12,8 @@ namespace MinhaAplicacao.Dominio.Interfaces.Repositories
         void Inserir(TEntidade entidade);
         void Alterar(TEntidade entidade);
         void Deletar(TEntidade entidade);
-        IQueryable<TEntidade> SelecionarPorId(TId id);
-        IQueryable<TEntidade> SelecionarTodos();
-        IQueryable<TEntidade> SelecionarPor(Expression<Func<TEntidade, bool>> predicado);
+        IQueryable<TEntidade> SelecionarPorId(TId id, params Expression<Func<TEntidade, object>>[] propriedades);
+        IQueryable<TEntidade> SelecionarTodos(params Expression<Func<TEntidade, object>>[] propriedades);
+        IQueryable<TEntidade> SelecionarPor(Expression<Func<TEntidade, bool>> predicado, params Expression<Func<TEntidade, object>>[] propriedades);
     }
 }

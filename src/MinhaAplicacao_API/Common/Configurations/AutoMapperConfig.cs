@@ -11,7 +11,8 @@ namespace MinhaAplicacao_API.Common.Configurations
             services.AddAutoMapper(
                 typeof(PessoaProfile).Assembly,
                 typeof(CardapioProfile).Assembly,
-                typeof(ComandaProfile).Assembly);
+                typeof(ComandaProfile).Assembly,
+                typeof(PedidoProfile).Assembly);
 
             return services;
         }

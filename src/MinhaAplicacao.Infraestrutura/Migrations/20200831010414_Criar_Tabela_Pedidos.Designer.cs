@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinhaAplicacao.Infraestrutura;
 
 namespace MinhaAplicacao.Infraestrutura.Migrations
 {
     [DbContext(typeof(MinhaAplicacaoDbContext))]
-    partial class MinhaAplicacaoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200831010414_Criar_Tabela_Pedidos")]
+    partial class Criar_Tabela_Pedidos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

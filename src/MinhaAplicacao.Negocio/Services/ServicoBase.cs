@@ -81,19 +81,19 @@ namespace MinhaAplicacao.Negocio.Services
             }
         }
 
-        public virtual async Task<TEntidade> SelecionarPorId(TId id)
+        public virtual async Task<TEntidade> SelecionarPorId(TId id, params Expression<Func<TEntidade, object>>[] propriedades)
         {
-            return await this._repositorio.SelecionarPorId(id).FirstOrDefaultAsync();
+            return await this._repositorio.SelecionarPorId(id, propriedades).FirstOrDefaultAsync();
         }
 
-        public virtual async Task<List<TEntidade>> SelecionarTodos()
+        public virtual async Task<List<TEntidade>> SelecionarTodos(params Expression<Func<TEntidade, object>>[] propriedades)
         {
-            return await this._repositorio.SelecionarTodos().ToListAsync();
+            return await this._repositorio.SelecionarTodos(propriedades).ToListAsync();
         }
 
-        public virtual async Task<List<TEntidade>> SelecionarPor(Expression<Func<TEntidade, bool>> predicado)
+        public virtual async Task<List<TEntidade>> SelecionarPor(Expression<Func<TEntidade, bool>> predicado, params Expression<Func<TEntidade, object>>[] propriedades)
         {
-            return await this._repositorio.SelecionarPor(predicado).ToListAsync();
+            return await this._repositorio.SelecionarPor(predicado, propriedades).ToListAsync();
         }
 
         public virtual async Task<bool> Existe(Expression<Func<TEntidade, bool>> predicado)

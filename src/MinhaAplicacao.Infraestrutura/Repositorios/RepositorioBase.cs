@@ -33,19 +33,24 @@ namespace MinhaAplicacao.Infraestrutura.Repositorios
             this.Entidade.Remove(entidade);
         }
 
-        public virtual IQueryable<TEntidade> SelecionarPorId(TId id)
+        public virtual IQueryable<TEntidade> SelecionarPorId(TId id, params Expression<Func<TEntidade, object>>[] propriedades)
         {
-            return this.Entidade.Where(e => e.Id.Equals(id)).AsNoTracking();
+            return this.Incluir(propriedades).Where(e => e.Id.Equals(id)).AsNoTracking();
         }
 
-        public virtual IQueryable<TEntidade> SelecionarTodos()
+        public virtual IQueryable<TEntidade> SelecionarTodos(params Expression<Func<TEntidade, object>>[] propriedades)
         {
-            return this.Entidade.AsNoTracking();
+            return this.Incluir(propriedades).AsNoTracking();
         }
 
-        public virtual IQueryable<TEntidade> SelecionarPor(Expression<Func<TEntidade, bool>> predicado)
+        public virtual IQueryable<TEntidade> SelecionarPor(Expression<Func<TEntidade, bool>> predicado, params Expression<Func<TEntidade, object>>[] propriedades)
         {
-            return this.Entidade.Where(predicado).AsNoTracking();
+            return this.Incluir(propriedades).Where(predicado).AsNoTracking();
+        }
+
+        private IQueryable<TEntidade> Incluir(params Expression<Func<TEntidade, object>>[] propriedades)
+        {
+            return propriedades.Aggregate(this.Entidade as IQueryable<TEntidade>, (current, include) => current.Include(include));
         }
 
         public void Dispose()
