@@ -60,54 +60,6 @@ namespace MinhaAplicacao_Cliente.Controllers
             return View(modelo);
         }
 
-        public async Task<IActionResult> Atualizar(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            PedidoModel mdeolo;
-
-            using (var httpClient = new HttpClient())
-            {
-                using var response = await httpClient.GetAsync($"{this._apiBaseUrl}/{id}");
-
-                mdeolo = JsonConvert.DeserializeObject<PedidoModel>(await response.Content.ReadAsStringAsync());
-
-                if (mdeolo == null)
-                {
-                    return NotFound();
-                }
-            }
-
-            return View(mdeolo);
-        }
-
-        public async Task<IActionResult> Excluir(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            PedidoModel mdeolo;
-
-            using (var httpClient = new HttpClient())
-            {
-                using var response = await httpClient.GetAsync($"{this._apiBaseUrl}/{id}");
-
-                mdeolo = JsonConvert.DeserializeObject<PedidoModel>(await response.Content.ReadAsStringAsync());
-
-                if (mdeolo == null)
-                {
-                    return NotFound();
-                }
-            }
-
-            return View(mdeolo);
-        }
-
         #endregion
 
         #region POSTs
@@ -133,48 +85,13 @@ namespace MinhaAplicacao_Cliente.Controllers
             }
 
             using var httpClient = new HttpClient();
-            using var response = await httpClient.GetAsync(this._apiBaseUrlComandas);
+            using var responseComandas = await httpClient.GetAsync(this._apiBaseUrlComandas);
+            using var responseCardapios = await httpClient.GetAsync(this._apiBaseUrlCardapios);
 
-            modelo.SelectComandas = this.ConverteSelectListItemComando(JsonConvert.DeserializeObject<IEnumerable<ComandaModel>>(await response.Content.ReadAsStringAsync()));
-
-            return View(modelo);
-        }
-
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Atualizar(int id, PedidoModel modelo)
-        {
-            if (id != modelo.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                using var cliente = new HttpClient();
-                var contuúdo = new StringContent(JsonConvert.SerializeObject(modelo), Encoding.UTF8, "application/json");
-                using var resposta = await cliente.PutAsync($"{this._apiBaseUrl}/{id}", contuúdo);
-
-                if (resposta.StatusCode == HttpStatusCode.OK)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-
-                var message = resposta.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-
-                ModelState.Clear();
-                ModelState.AddModelError(string.Empty, message);
-            }
+            modelo.SelectComandas = this.ConverteSelectListItemComando(JsonConvert.DeserializeObject<IEnumerable<ComandaModel>>(await responseComandas.Content.ReadAsStringAsync()));
+            modelo.SelectCardapios = this.ConverteSelectListItemCardapio(JsonConvert.DeserializeObject<IEnumerable<CardapioModel>>(await responseCardapios.Content.ReadAsStringAsync()));
 
             return View(modelo);
-        }
-
-        [HttpPost, ActionName("Excluir"), ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExcluirCorminar(int id)
-        {
-            using var cliente = new HttpClient();
-            using var resposta = await cliente.DeleteAsync($"{this._apiBaseUrl}/{id}");
-
-            return resposta.StatusCode == HttpStatusCode.OK ? RedirectToAction(nameof(Index)) : RedirectToAction(nameof(Excluir), id);
         }
 
         #endregion

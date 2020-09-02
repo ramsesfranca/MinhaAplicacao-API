@@ -19,6 +19,7 @@ namespace MinhaAplicacao_Cliente.Models
         public DateTime DataHoraCadastro { get; set; }
 
         public ComandaModel Comanda { get; set; }
+        public CardapioModel Cardapio { get; set; }
 
         public IEnumerable<SelectListItem> SelectComandas { get; set; }
         public IEnumerable<SelectListItem> SelectCardapios { get; set; }

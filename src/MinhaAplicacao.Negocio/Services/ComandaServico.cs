@@ -1,4 +1,5 @@
-﻿using MinhaAplicacao.Dominio.Entidades;
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using MinhaAplicacao.Dominio.Entidades;
 using MinhaAplicacao.Dominio.Enums;
 using MinhaAplicacao.Dominio.Interfaces.Repositories;
 using MinhaAplicacao.Dominio.Interfaces.Services;
@@ -9,9 +10,12 @@ namespace MinhaAplicacao.Negocio.Services
 {
     public class ComandaServico : ServicoBase<int, Comanda, IComandaRepositorio>, IComandaServico
     {
-        public ComandaServico(IUnitOfWork unitOfWork, IComandaRepositorio repositorio)
+        private readonly IPedidoServico _pedidoServico;
+
+        public ComandaServico(IUnitOfWork unitOfWork, IComandaRepositorio repositorio, IPedidoServico pedidoServico)
             : base(unitOfWork, repositorio)
         {
+            this._pedidoServico = pedidoServico;
         }
 
         public async Task Inserir()
@@ -23,6 +27,16 @@ namespace MinhaAplicacao.Negocio.Services
             };
 
             await base.Inserir(comanda);
+        }
+
+        public async Task Resetar(int id)
+        {
+            var pedidos = await this._pedidoServico.SelecionarPor(p => p.ComandaId == id);
+
+            if (pedidos.Any())
+            {
+                await this._pedidoServico.Deletar(pedidos);
+            }
         }
     }
 }

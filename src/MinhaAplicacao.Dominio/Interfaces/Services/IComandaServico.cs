@@ -7,5 +7,6 @@ namespace MinhaAplicacao.Dominio.Interfaces.Services
     public interface IComandaServico : IServicoBase<int, Comanda, IComandaRepositorio>
     {
         Task Inserir();
+        Task Resetar(int id);
     }
 }

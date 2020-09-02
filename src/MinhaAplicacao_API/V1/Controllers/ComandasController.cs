@@ -34,5 +34,13 @@ namespace MinhaAplicacao_API.V1.Controllers
 
             return Ok();
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Comanda>> Resetar(int id)
+        {
+            await this._ComandaServico.Resetar(id);
+
+            return Ok();
+        }
     }
 }

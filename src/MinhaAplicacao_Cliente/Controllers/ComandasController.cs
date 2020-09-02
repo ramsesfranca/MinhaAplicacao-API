@@ -52,6 +52,21 @@ namespace MinhaAplicacao_Cliente.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Resetar(int id)
+        {
+            using var resposta = await new HttpClient().PutAsync($"{this._apiBaseUrl}/{id}", null);
+
+            if (resposta.StatusCode != HttpStatusCode.OK)
+            {
+                var message = resposta.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, message);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
         #endregion
     }
 }

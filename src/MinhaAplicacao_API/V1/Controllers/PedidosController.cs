@@ -25,7 +25,7 @@ namespace MinhaAplicacao_API.V1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PedidoModel>>> ObterTodos()
         {
-            return this.Ok(this._mapper.Map<List<PedidoModel>>(await this._PedidoServico.SelecionarTodos(p => p.Comanda)));
+            return this.Ok(this._mapper.Map<List<PedidoModel>>(await this._PedidoServico.SelecionarTodos(p => p.Comanda, p => p.Cardapio)));
         }
 
         [HttpGet("{id}")]

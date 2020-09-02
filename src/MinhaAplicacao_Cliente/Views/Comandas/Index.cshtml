@@ -14,6 +14,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.StatusComanda)
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StatusComanda)
+                </td>
+                <td>
+                    <a asp-action="Resetar" asp-route-id="@item.Id">Resetar</a>
                 </td>
             </tr>
         }
