@@ -52,8 +52,13 @@ namespace MinhaAplicacao_Cliente.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Resetar(int id)
+        public async Task<IActionResult> Resetar(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             using var resposta = await new HttpClient().PutAsync($"{this._apiBaseUrl}/{id}", null);
 
             if (resposta.StatusCode != HttpStatusCode.OK)
@@ -65,6 +70,30 @@ namespace MinhaAplicacao_Cliente.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Fechamento(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ComandaModel mdeolo;
+
+            using (var httpClient = new HttpClient())
+            {
+                using var response = await httpClient.GetAsync($"{this._apiBaseUrl}/{id}");
+
+                mdeolo = JsonConvert.DeserializeObject<ComandaModel>(await response.Content.ReadAsStringAsync());
+
+                if (mdeolo == null)
+                {
+                    return NotFound();
+                }
+            }
+
+            return View(mdeolo);
         }
 
         #endregion

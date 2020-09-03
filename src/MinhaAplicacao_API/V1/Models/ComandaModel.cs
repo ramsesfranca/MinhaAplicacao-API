@@ -6,5 +6,6 @@ namespace MinhaAplicacao_API.V1.Models
     {
         public string Codigo { get; set; }
         public StatusComanda StatusComanda { get; set; }
+        public decimal Total { get; set; }
     }
 }

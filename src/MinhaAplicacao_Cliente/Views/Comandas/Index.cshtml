@@ -28,7 +28,8 @@
                     @Html.DisplayFor(modelItem => item.StatusComanda)
                 </td>
                 <td>
-                    <a asp-action="Resetar" asp-route-id="@item.Id">Resetar</a>
+                    <a asp-action="Resetar" asp-route-id="@item.Id">Resetar</a> |
+                    <a asp-action="Fechamento" asp-route-id="@item.Id">Fechamento</a>
                 </td>
             </tr>
         }

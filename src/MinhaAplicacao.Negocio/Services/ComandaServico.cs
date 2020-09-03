@@ -4,6 +4,7 @@ using MinhaAplicacao.Dominio.Enums;
 using MinhaAplicacao.Dominio.Interfaces.Repositories;
 using MinhaAplicacao.Dominio.Interfaces.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MinhaAplicacao.Negocio.Services
@@ -20,23 +21,35 @@ namespace MinhaAplicacao.Negocio.Services
 
         public async Task Inserir()
         {
-            var comanda = new Comanda
+            await base.Inserir(new Comanda
             {
-                Codigo = $"{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}{DateTime.Now.Day}{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}",
+                Codigo = GerarCodigo(),
                 StatusComanda = StatusComanda.Aerta
-            };
-
-            await base.Inserir(comanda);
+            });
         }
 
         public async Task Resetar(int id)
         {
-            var pedidos = await this._pedidoServico.SelecionarPor(p => p.ComandaId == id);
+            var comanda = await this.SelecionarPorId(id, c => c.Pedidos);
 
-            if (pedidos.Any())
+            if (comanda != null && EnumerableExtensions.Any(comanda.Pedidos))
             {
-                await this._pedidoServico.Deletar(pedidos);
+                await this._pedidoServico.Deletar(comanda.Pedidos.ToList());
             }
+        }
+
+        public async Task<Comanda> Fechamento(int id)
+        {
+            var comandas = await this.SelecionarPorId(id, c => c.Pedidos); //.Select(p => p.Cardapio)
+
+            var teste = comandas.Pedidos.GroupBy(p => p.CardapioId).ToList();
+
+            return comandas;
+        }
+
+        private static string GerarCodigo()
+        {
+            return $"{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}{DateTime.Now.Day}{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}";
         }
     }
 }

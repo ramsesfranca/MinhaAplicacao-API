@@ -8,5 +8,6 @@ namespace MinhaAplicacao.Dominio.Interfaces.Services
     {
         Task Inserir();
         Task Resetar(int id);
+        Task<Comanda> Fechamento(int id);
     }
 }

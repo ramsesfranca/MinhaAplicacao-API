@@ -35,6 +35,19 @@ namespace MinhaAplicacao_API.V1.Controllers
             return Ok();
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Pessoa>> Fechamento(int id)
+        {
+            var comanda = await this._ComandaServico.Fechamento(id);
+
+            if (comanda == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(this._mapper.Map<ComandaModel>(comanda));
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult<Comanda>> Resetar(int id)
         {
