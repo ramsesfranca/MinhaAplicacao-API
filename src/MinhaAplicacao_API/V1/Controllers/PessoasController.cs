@@ -76,10 +76,8 @@ namespace MinhaAplicacao_API.V1.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+
+                throw;
             }
 
             return Ok(modelo);

@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MinhaAplicacao_Cliente.Models
 {
-    public class PessoaModel
+    public class PessoaModel : ModelBase<int>
     {
-        [Key]
-        public int Id { get; set; }
-
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [StringLength(80, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]

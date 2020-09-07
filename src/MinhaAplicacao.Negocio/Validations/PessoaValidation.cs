@@ -10,6 +10,11 @@ namespace MinhaAplicacao.Negocio.Validations
         {
             RuleFor(x => x).Custom((pessoa, contexto) =>
             {
+                if (PessoaServico.Existe(u => u.Nome.Equals(pessoa.Nome) &&
+                                              u.Id != pessoa.Id).Result)
+                {
+                    contexto.AddFailure("Nome", "Este campo já foi cadastrado");
+                }
                 if (PessoaServico.Existe(u => u.CPF.Equals(pessoa.CPF) &&
                                               u.Id != pessoa.Id).Result)
                 {

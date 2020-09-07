@@ -18,9 +18,9 @@ namespace MinhaAplicacao.Dominio.Interfaces.Services
         Task Alterar(List<TEntidade> entidades);
         Task Deletar(TEntidade entidade);
         Task Deletar(List<TEntidade> entidades);
-        Task<TEntidade> SelecionarPorId(TId id);
-        Task<List<TEntidade>> SelecionarTodos();
-        Task<List<TEntidade>> SelecionarPor(Expression<Func<TEntidade, bool>> predicado);
+        Task<TEntidade> SelecionarPorId(TId id, params Expression<Func<TEntidade, object>>[] propriedades);
+        Task<List<TEntidade>> SelecionarTodos(params Expression<Func<TEntidade, object>>[] propriedades);
+        Task<List<TEntidade>> SelecionarPor(Expression<Func<TEntidade, bool>> predicado, params Expression<Func<TEntidade, object>>[] propriedades);
         Task<bool> Existe(Expression<Func<TEntidade, bool>> predicado);
     }
 }

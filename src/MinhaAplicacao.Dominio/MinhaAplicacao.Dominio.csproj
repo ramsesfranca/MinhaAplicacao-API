@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Entidades\PedidoCardapio.cs" />
+  </ItemGroup>
+
 </Project>

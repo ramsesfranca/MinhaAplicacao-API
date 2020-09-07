@@ -4,9 +4,9 @@ using MinhaAplicacao.Dominio.Entidades;
 
 namespace MinhaAplicacao.Infraestrutura.Mapeamentos
 {
-    public class PessoaMapeamento : IEntityTypeConfiguration<Pessoa>
+    public class PessoaMapeamento : BaseMapeamento<int, Pessoa>
     {
-        public void Configure(EntityTypeBuilder<Pessoa> builder)
+        public override void Configure(EntityTypeBuilder<Pessoa> builder)
         {
             builder.ToTable("Pessoas");
 
@@ -17,8 +17,8 @@ namespace MinhaAplicacao.Infraestrutura.Mapeamentos
             builder.Property(p => p.Nacionalidade).HasColumnType("varchar(80)");
             builder.Property(p => p.Naturalidade).HasColumnType("varchar(80)");
             builder.Property(p => p.CPF).IsRequired().HasColumnType("varchar(14)");
-            builder.Property(p => p.DataHoraCadastro).IsRequired().HasColumnType("datetime");
-            builder.Property(p => p.DataHoraModificado).HasColumnType("datetime");
+
+            base.Configure(builder);
         }
     }
 }

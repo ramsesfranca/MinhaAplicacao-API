@@ -10,14 +10,19 @@ using System.Threading.Tasks;
 
 namespace MinhaAplicacao_Cliente.Controllers
 {
-    public class PessoasController : Controller
+    public class PessoasController : BaseController
     {
-        private readonly string _apiBaseUrl;
+        #region Construtores
 
         public PessoasController(IConfiguration configuration)
+            : base(configuration)
         {
-            this._apiBaseUrl = configuration.GetValue<string>("WebAPIBaseUrl");
+            this._apiBaseUrl += "Pessoas";
         }
+
+        #endregion
+
+        #region GETs
 
         public async Task<IActionResult> Index()
         {
@@ -86,6 +91,10 @@ namespace MinhaAplicacao_Cliente.Controllers
             return View(mdeolo);
         }
 
+        #endregion
+
+        #region POSTs
+
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Adicionar(PessoaModel modelo)
         {
@@ -145,5 +154,7 @@ namespace MinhaAplicacao_Cliente.Controllers
 
             return resposta.StatusCode == HttpStatusCode.OK ? RedirectToAction(nameof(Index)) : RedirectToAction(nameof(Excluir), id);
         }
+
+        #endregion
     }
 }

@@ -9,7 +9,10 @@ namespace MinhaAplicacao_API.Common.Configurations
         public static IServiceCollection CarregarAutoMapper(this IServiceCollection services)
         {
             services.AddAutoMapper(
-                typeof(PessoaProfile).Assembly);
+                typeof(PessoaProfile).Assembly,
+                typeof(CardapioProfile).Assembly,
+                typeof(ComandaProfile).Assembly,
+                typeof(PedidoProfile).Assembly);
 
             return services;
         }

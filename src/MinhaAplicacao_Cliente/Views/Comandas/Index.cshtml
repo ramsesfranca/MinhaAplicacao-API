@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MinhaAplicacao_Cliente.Models.ComandaModel>
+
+<h4>Comandas</h4>
+
+<p>
+    <a asp-action="Adicionar">Nova</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusComanda)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusComanda)
+                </td>
+                <td>
+                    <a asp-action="Resetar" asp-route-id="@item.Id">Resetar</a> |
+                    <a asp-action="Fechamento" asp-route-id="@item.Id">Fechamento</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
