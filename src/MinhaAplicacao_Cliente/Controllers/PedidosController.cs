@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using MinhaAplicacao_Cliente.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -53,11 +51,11 @@ namespace MinhaAplicacao_Cliente.Controllers
 
             var modelo = new PedidoModel
             {
-                SelectComandas = this.ConverteSelectListItemComando(JsonConvert.DeserializeObject<IEnumerable<ComandaModel>>(await responseComandas.Content.ReadAsStringAsync())),
-                SelectCardapios = this.ConverteSelectListItemCardapio(JsonConvert.DeserializeObject<IEnumerable<CardapioModel>>(await responseCardapios.Content.ReadAsStringAsync()))
+                //SelectComandas = this.ConverteSelectListItemComando(JsonConvert.DeserializeObject<IEnumerable<ComandaModel>>(await responseComandas.Content.ReadAsStringAsync())),
+                //SelectCardapios = this.ConverteSelectListItemCardapio(JsonConvert.DeserializeObject<IEnumerable<CardapioModel>>(await responseCardapios.Content.ReadAsStringAsync()))
             };
 
-            return View(modelo);
+            return this.View(modelo);
         }
 
         #endregion
@@ -88,30 +86,30 @@ namespace MinhaAplicacao_Cliente.Controllers
             using var responseComandas = await httpClient.GetAsync(this._apiBaseUrlComandas);
             using var responseCardapios = await httpClient.GetAsync(this._apiBaseUrlCardapios);
 
-            modelo.SelectComandas = this.ConverteSelectListItemComando(JsonConvert.DeserializeObject<IEnumerable<ComandaModel>>(await responseComandas.Content.ReadAsStringAsync()));
-            modelo.SelectCardapios = this.ConverteSelectListItemCardapio(JsonConvert.DeserializeObject<IEnumerable<CardapioModel>>(await responseCardapios.Content.ReadAsStringAsync()));
+            //modelo.SelectComandas = this.ConverteSelectListItemComando(JsonConvert.DeserializeObject<IEnumerable<ComandaModel>>(await responseComandas.Content.ReadAsStringAsync()));
+            //modelo.SelectCardapios = this.ConverteSelectListItemCardapio(JsonConvert.DeserializeObject<IEnumerable<CardapioModel>>(await responseCardapios.Content.ReadAsStringAsync()));
 
             return View(modelo);
         }
 
         #endregion
 
-        private IEnumerable<SelectListItem> ConverteSelectListItemComando(IEnumerable<ComandaModel> comandos)
-        {
-            return comandos.Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Codigo
-            });
-        }
+        //private IEnumerable<SelectListItem> ConverteSelectListItemComando(IEnumerable<ComandaModel> comandos)
+        //{
+        //    return comandos.Select(x => new SelectListItem
+        //    {
+        //        Value = x.Id.ToString(),
+        //        Text = x.Codigo
+        //    });
+        //}
 
-        private IEnumerable<SelectListItem> ConverteSelectListItemCardapio(IEnumerable<CardapioModel> comandos)
-        {
-            return comandos.Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Nome
-            });
-        }
+        //private IEnumerable<SelectListItem> ConverteSelectListItemCardapio(IEnumerable<CardapioModel> comandos)
+        //{
+        //    return comandos.Select(x => new SelectListItem
+        //    {
+        //        Value = x.Id.ToString(),
+        //        Text = x.Nome
+        //    });
+        //}
     }
 }

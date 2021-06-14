@@ -13,25 +13,25 @@ namespace MinhaAplicacao_API.V1.Controllers
     [ApiVersion("1.0")]
     public class PedidosController : MinhaAplicacaoController
     {
-        private readonly IPedidoServico _PedidoServico;
+        private readonly IPedidoServico _pedidoServico;
         private readonly IMapper _mapper;
 
-        public PedidosController(IPedidoServico PedidoServico, IMapper mapper)
+        public PedidosController(IPedidoServico pedidoServico, IMapper mapper)
         {
-            this._PedidoServico = PedidoServico;
+            this._pedidoServico = pedidoServico;
             this._mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PedidoModel>>> ObterTodos()
         {
-            return this.Ok(this._mapper.Map<List<PedidoModel>>(await this._PedidoServico.SelecionarTodos(p => p.Comanda, p => p.Cardapio)));
+            return this.Ok(this._mapper.Map<List<PedidoModel>>(await this._pedidoServico.SelecionarTodos(p => p.ItensPedidos)));
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Pedido>> ObterPorId(int id)
         {
-            var Pedido = await this._PedidoServico.SelecionarPorId(id);
+            var Pedido = await this._pedidoServico.SelecionarPorId(id, p => p.ItensPedidos);
 
             if (Pedido == null)
             {
@@ -49,7 +49,7 @@ namespace MinhaAplicacao_API.V1.Controllers
                 return BadRequest(ModelState);
             }
 
-            await this._PedidoServico.Inserir(this._mapper.Map<Pedido>(modelo));
+            await this._pedidoServico.Inserir(this._mapper.Map<Pedido>(modelo));
 
             return Ok(modelo);
         }
@@ -68,11 +68,18 @@ namespace MinhaAplicacao_API.V1.Controllers
 
             try
             {
-                await this._PedidoServico.Alterar(this._mapper.Map<Pedido>(modelo));
+                var Pedido = await this._pedidoServico.SelecionarPorId(modelo.Id, p => p.ItensPedidos);
+
+                if (Pedido == null)
+                {
+                    return NotFound();
+                }
+
+                await this._pedidoServico.Alterar(Pedido);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await this._PedidoServico.Existe(p => p.Id.Equals(id)))
+                if (!await this._pedidoServico.Existe(p => p.Id.Equals(id)))
                 {
                     return NotFound();
                 }
@@ -86,14 +93,14 @@ namespace MinhaAplicacao_API.V1.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Pedido>> Excluir(int id)
         {
-            var Pedido = await this._PedidoServico.SelecionarPorId(id);
+            var Pedido = await this._pedidoServico.SelecionarPorId(id, p => p.ItensPedidos);
 
             if (Pedido == null)
             {
                 return NotFound();
             }
 
-            await this._PedidoServico.Deletar(Pedido);
+            await this._pedidoServico.Deletar(Pedido);
 
             return Ok();
         }

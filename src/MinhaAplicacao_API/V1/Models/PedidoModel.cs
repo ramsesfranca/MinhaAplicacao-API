@@ -1,15 +1,11 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace MinhaAplicacao_API.V1.Models
 {
     public class PedidoModel : ModelBase<int>
     {
-        public int ComandaId { get; set; }
-        public int CardapioId { get; set; }
+        public string Numero { get; set; }
 
-        public DateTime DataHoraCadastro { get; set; }
-
-        public ComandaModel Comanda { get; set; }
-        public CardapioModel Cardapio { get; set; }
+        public IEnumerable<ItemPedidoModel> ItensPedidos { get; set; }
     }
 }

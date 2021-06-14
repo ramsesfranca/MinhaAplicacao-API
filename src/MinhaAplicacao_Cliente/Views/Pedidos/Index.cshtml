@@ -9,16 +9,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Comanda.Codigo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cardapio.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cardapio.Preco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataHoraCadastro)
+                @Html.DisplayNameFor(model => model.Numero)
             </th>
         </tr>
     </thead>
@@ -27,16 +18,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Comanda.Codigo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cardapio.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cardapio.Preco)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataHoraCadastro)
+                    @Html.DisplayFor(modelItem => item.Numero)
                 </td>
             </tr>
         }

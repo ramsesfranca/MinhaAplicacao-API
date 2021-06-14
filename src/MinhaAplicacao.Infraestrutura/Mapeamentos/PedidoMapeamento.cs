@@ -10,6 +10,8 @@ namespace MinhaAplicacao.Infraestrutura.Mapeamentos
         {
             builder.ToTable("Pedidos");
 
+            builder.Property(p => p.Numero).HasMaxLength(80).IsUnicode(false).IsRequired();
+
             base.Configure(builder);
         }
     }

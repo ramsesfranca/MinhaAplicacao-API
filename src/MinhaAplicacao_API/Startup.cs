@@ -10,11 +10,11 @@ namespace MinhaAplicacao_API
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        private IConfiguration _configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this._configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -24,10 +24,9 @@ namespace MinhaAplicacao_API
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddControllers();
             services.AddApiConfig();
             services.AddSwaggerConfig();
-            services.CarrearConnection(this.Configuration);
+            services.CarrearConnection(this._configuration);
             services.CarregarDependencias();
             services.CarregarAutoMapper();
         }
@@ -47,10 +46,10 @@ namespace MinhaAplicacao_API
                 endpoints.MapControllers();
             });
             app.UseSwagger();
-            app.UseSwaggerUI(options =>
+            app.UseSwaggerUI(o =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
-                options.RoutePrefix = string.Empty;
+                o.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
+                o.RoutePrefix = string.Empty;
             });
         }
     }

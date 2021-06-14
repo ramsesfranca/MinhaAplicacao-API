@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using MinhaAplicacao_API.Common.Mappers.Profiles;
 
 namespace MinhaAplicacao_API.Common.Configurations
@@ -9,10 +8,9 @@ namespace MinhaAplicacao_API.Common.Configurations
         public static IServiceCollection CarregarAutoMapper(this IServiceCollection services)
         {
             services.AddAutoMapper(
-                typeof(PessoaProfile).Assembly,
-                typeof(CardapioProfile).Assembly,
-                typeof(ComandaProfile).Assembly,
-                typeof(PedidoProfile).Assembly);
+                typeof(PedidoProfile).Assembly,
+                typeof(ItemPedidoProfile).Assembly,
+                typeof(StatusPedidoProfile).Assembly);
 
             return services;
         }

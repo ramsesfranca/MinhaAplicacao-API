@@ -9,7 +9,7 @@ namespace MinhaAplicacao_API.Common.Configurations
     {
         public static IServiceCollection CarrearConnection(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<MinhaAplicacaoDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<MinhaAplicacaoDbContext>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             return services;
         }

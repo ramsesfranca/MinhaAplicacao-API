@@ -18,13 +18,19 @@ namespace MinhaAplicacao.Infraestrutura
         {
             base.OnModelCreating(modelBuilder);
 
+            #region Configurações Básicas
+
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            #endregion
+
             #region Configurações Entidades
 
-            modelBuilder.ApplyConfiguration(new PessoaMapeamento());
-            modelBuilder.ApplyConfiguration(new CardapioMapeamento());
-            modelBuilder.ApplyConfiguration(new ComandaMapeamento());
             modelBuilder.ApplyConfiguration(new PedidoMapeamento());
-            //modelBuilder.ApplyConfiguration(new PedidoCardapioMapeamento());
+            modelBuilder.ApplyConfiguration(new ItemItemPedidoMapeamento());
 
             #endregion
         }
